@@ -26,6 +26,8 @@ a {
   right: 0;
   z-index: 9999;
   width: 100%;
+  position: fixed;
+  background-color: #fff;
 }
 .hero-image img {
   width: 100%;
@@ -36,7 +38,6 @@ a {
   align-items: center;
 }
 .hero-section {
-  border: 2px solid green;
   background-image: url('/IMAGES/hero-image.svg');
   background-size: cover;
   background-position: center;
@@ -60,8 +61,8 @@ a {
     margin-right: 20px;
   }
   .hero-section {
-    border: 2px solid green;
     height: 500px;
+    margin-top: 100px;
   }
 
   .logo-wrapper {
@@ -77,6 +78,12 @@ a {
     height: 70px;
     display: flex;
     justify-content: space-between;
+    position: fixed;
+    background-color: #fff;
+    width: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
   }
   .logo-wrapper {
     gap: 2px;
@@ -101,9 +108,13 @@ a {
   }
 
   .hero-section {
-    height: 250px;
+    height: 180px;
+    margin-top: 70px;
   }
   .mobile-nav li:not(:first-of-type) {
     margin-top: 1.5rem;
+  }
+  .product-section img {
+    height: 200px;
   }
 }
