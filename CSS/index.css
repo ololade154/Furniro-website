@@ -97,13 +97,13 @@ a {
   .mobile-nav {
     top: 0;
     position: fixed;
-    right: 0;
+    right: -200px;
     width: 200px;
     height: 100vh;
     background-color: #fff;
     padding: 10px 15px;
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
     transition: right 0.5s;
   }
 
