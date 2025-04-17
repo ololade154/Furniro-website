@@ -98,13 +98,13 @@ a {
     top: 0;
     position: fixed;
     right: 0;
-    width: 50%;
+    width: 200px;
     height: 100vh;
-    background-color: blue;
+    background-color: #fff;
     padding: 10px 15px;
     display: flex;
     flex-direction: column;
-    display: none;
+    transition: right 0.5s;
   }
 
   .hero-section {

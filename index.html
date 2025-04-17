@@ -54,11 +54,21 @@
                 <h1>Furniro</h1>
               </div>
             </div>
-            <img src="/IMAGES/menu-icon.svg" alt="Menu Icon" />
+            <img
+              src="/IMAGES/menu-icon.svg"
+              alt="Menu Icon"
+              onclick="openMenu()"
+              class="menu-icon"
+            />
           </div>
           <ul class="mobile-nav">
             <li>
-              <img src="/IMAGES/close-icon.svg" alt="Close Icon" />
+              <img
+                src="/IMAGES/close-icon.svg"
+                alt="Close Icon"
+                onclick="closeMenu()"
+                class="close-icon"
+              />
             </li>
             <li><a href="#">Home</a></li>
             <li><a href="#">Shop</a></li>
@@ -79,5 +89,14 @@
         </div>
       </div>
     </div>
+    <script>
+      let mobileNav = document.querySelector('.mobile-nav');
+      function openMenu() {
+        mobileNav.style.right = '0';
+      }
+      function closeMenu() {
+        mobileNav.style.right = '-200px';
+      }
+    </script>
   </body>
 </html>
