@@ -15,6 +15,10 @@ a {
   color: black;
 }
 
+body  {
+  position: relative;
+}
+
 .user-icon,
 .search-icon,
 .heart-icon,
@@ -26,8 +30,8 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 40px;
-  height: 100px;
+  padding: 10px 40px;
+  height: 80px;
   top: 0;
   left: 0;
   right: 0;
@@ -60,9 +64,15 @@ a {
   .mobile-wrapper {
     display: none;
   }
+  a {
+    font-size: 15px;
+    font-weight: 400;
+  }
 
   .desktop-nav ul {
     display: flex;
+    align-items: center;
+    gap: 10px;
   }
   .desktop-nav li {
     margin-right: 20px;
@@ -79,17 +89,17 @@ a {
   }
   .hero-section {
     height: 560px;
-    margin-top: 100px;
+    margin-top: 70px;
   }
 
   .logo-wrapper {
     gap: 3px;
   }
   .logo img {
-    height: 40px;
+    height: 30px;
   }
   .logo-content h1 {
-    font-size: 30px;
+    font-size: 28px;
     font-weight: 600;
   }
   .hero-content {
@@ -168,6 +178,7 @@ a {
   .product-header h6 {
     font-size: 32px;
     font-weight: 700;
+    margin-bottom: 15px;
   }
   .product-display {
     display: grid;
@@ -221,7 +232,7 @@ a {
   }
   .product-text button {
     display: block;
-    margin-top: 3px;
+    margin-top: 10px;
     outline: 0;
     border: 0;
     background-color: #fff;
@@ -310,12 +321,20 @@ a {
   .links li:first-of-type {
     margin-top: 2rem;
   }
+  .modal {
+    height: 100vh;
+    background-color: red;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
 }
 
 @media screen and (min-width: 100px) and (max-width: 650px) {
   .desktop-wrapper {
     display: none;
   }
+
   .mobile-navigation {
     padding: 15px 18px;
     height: 70px;
