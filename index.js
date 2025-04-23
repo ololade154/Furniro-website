@@ -145,3 +145,24 @@ const productNode = (data) => {
 const prod = Products.map((product) => productNode(product));
 
 productSection.append(...prod);
+const modalWrapper = document.querySelector('.modal-wrapper');
+const modal = document.querySelector('.modal');
+const modalData = () => {
+  const modalHeader = document.createElement('div');
+  modalHeader.className = 'modal-header';
+  const cartLabel = document.createElement('h2');
+  cartLabel.textContent = 'My Cart';
+  const closeModal = document.createElement('img');
+  closeModal.setAttribute('src', '/IMAGES/delete.svg');
+  closeModal.className = 'modal-close';
+  modalHeader.appendChild(cartLabel);
+  modalHeader.appendChild(closeModal);
+  // console.log(modalHeader);
+  const modalContent = document.createElement('div');
+  modalContent.className = 'modal-content';
+  const cartItem = document.createElement('div');
+  cartItem.className = 'cart-item';
+  modalContent.appendChild(cartItem);
+  console.log(modalContent);
+};
+modalData();
