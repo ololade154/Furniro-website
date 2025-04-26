@@ -88,6 +88,8 @@ const logo = document.querySelector('.cart-logo');
 
 logo.addEventListener('click', () => {
   modal.style.display = 'block'; // Make it appear in the flow
+  console.log('clicked');
+
   setTimeout(() => {
     modal.classList.remove('hidden'); // Trigger fade-in effect
   }, 10);

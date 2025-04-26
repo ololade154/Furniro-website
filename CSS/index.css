@@ -14,6 +14,7 @@ ul li {
 .cart-icon {
   position: relative; /* This will allow the child .no-of-item to be positioned relative to this container */
   display: inline-block; /* Ensures the cart icon and the number align properly */
+  z-index: 1000000;
 }
 
 .no-of-item {
@@ -39,7 +40,7 @@ ul li {
   visibility: hidden;
 }
 .no-of-item.hidden {
- display: none;
+  display: none;
 }
 a {
   text-decoration: none;
@@ -729,10 +730,10 @@ body {
     align-items: center;
     justify-content: space-between;
   }
-  .modal-wrapper {
+  /* .modal-wrapper {
     width: 100%;
     padding: 10px;
-  }
+  } */
   .product1-image {
     width: 35px;
     height: 35px;
@@ -745,8 +746,9 @@ body {
     position: fixed;
     top: 0;
     right: 0;
+
     z-index: 9999999;
-    background-color: #ffff;
+    background-color: #cea9a9;
     width: 100%;
     height: 100vh;
     padding: 20px 20px;
