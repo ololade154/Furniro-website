@@ -84,7 +84,14 @@ const Products = [
 ];
 
 const cart = JSON.parse(localStorage.getItem('carts')) || [];
-console.log(cart, 'cart');
+const logo = document.querySelector('.cart-logo');
+
+logo.addEventListener('click', () => {
+  modal.style.display = 'block'; // Make it appear in the flow
+  setTimeout(() => {
+    modal.classList.remove('hidden'); // Trigger fade-in effect
+  }, 10);
+});
 
 const addItemToCart = (product) => {
   const cart = JSON.parse(localStorage.getItem('carts')) || [];
@@ -95,7 +102,6 @@ const addItemToCart = (product) => {
     product.quantity = 1;
     cart.push(product);
   }
-
   localStorage.setItem('carts', JSON.stringify(cart));
 };
 
@@ -133,6 +139,7 @@ const productNode = (data) => {
   button.innerHTML = 'Add to Cart';
   button.addEventListener('click', () => {
     addItemToCart(data);
+    renderCart();
     alert('Product added to cart!');
   });
   product_text.appendChild(button);
@@ -142,28 +149,166 @@ const productNode = (data) => {
   return product;
 };
 
-const prod = Products.map((product) => productNode(product));
+document.addEventListener('DOMContentLoaded', () => {
+  const prod = Products.map((product) => productNode(product));
 
-productSection.append(...prod);
+  console.log(prod, 'produ');
+  productSection.append(...prod);
+});
 
-const modalWrapper = document.querySelector('.modal-wrapper');
-const modal = document.querySelector('.modal');
-const modalData = () => {
-  const modalHeader = document.createElement('div');
-  modalHeader.className = 'modal-header';
-  const cartLabel = document.createElement('h2');
-  cartLabel.textContent = 'My Cart';
-  const closeModal = document.createElement('img');
-  closeModal.setAttribute('src', '/IMAGES/delete.svg');
-  closeModal.className = 'modal-close';
-  modalHeader.appendChild(cartLabel);
-  modalHeader.appendChild(closeModal);
-  // console.log(modalHeader);
-  const modalContent = document.createElement('div');
-  modalContent.className = 'modal-content';
+const IncreaseItemQuantity = (id) => {
+  const cart = JSON.parse(localStorage.getItem('carts')) || [];
+
+  const updatedCart = cart.map((item) =>
+    item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+  );
+
+  localStorage.setItem('carts', JSON.stringify(updatedCart));
+  renderCart(); // this will now use the updated cart from localStorage
+};
+
+const DecreaseItemQuantity = (id) => {
+  const cart = JSON.parse(localStorage.getItem('carts')) || [];
+
+  const updatedCart = cart.map((item) =>
+    item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+  );
+
+  localStorage.setItem('carts', JSON.stringify(updatedCart));
+  renderCart();
+};
+
+const deleteCartItem = (id) => {
+  const cart = JSON.parse(localStorage.getItem('carts')) || [];
+  const updatedCart = cart.filter((item) => item.id !== id);
+  localStorage.setItem('carts', JSON.stringify(updatedCart));
+  renderCart();
+};
+
+function createCartItem({ imageSrc, titleText, priceText, quantity, id }) {
+  // Create the main cart item div
   const cartItem = document.createElement('div');
   cartItem.className = 'cart-item';
-  modalContent.appendChild(cartItem);
-  console.log(modalContent);
-};
-modalData();
+
+  // Create and append the image
+  const img = document.createElement('img');
+  img.className = 'cart-img';
+  img.src = imageSrc;
+  img.alt = '';
+  cartItem.appendChild(img);
+
+  // Create the right-side div
+  const cartRight = document.createElement('div');
+  cartRight.className = 'cart-right';
+
+  // Title and price container
+  const infoDiv = document.createElement('div');
+
+  const title = document.createElement('h1');
+  title.className = 'product-cart-title';
+  title.textContent = titleText;
+
+  const price = document.createElement('p');
+  price.className = 'product-price';
+  price.textContent = priceText;
+
+  infoDiv.appendChild(title);
+  infoDiv.appendChild(price);
+
+  // Bottom section
+  const bottomDiv = document.createElement('div');
+  bottomDiv.className = 'bottom';
+
+  const deleteIcon = document.createElement('img');
+  deleteIcon.src = '/IMAGES/delete-icon.svg';
+  deleteIcon.alt = '';
+  deleteIcon.className = 'delete-icon';
+  deleteIcon.addEventListener('click', () => {
+    deleteCartItem(id);
+  });
+  bottomDiv.appendChild(deleteIcon);
+
+  // Quantity button
+  const quantityBtn = document.createElement('button');
+  quantityBtn.className = 'product-increment-btn';
+
+  ['-', quantity.toString(), '+'].forEach((text, index) => {
+    const p = document.createElement('p');
+    p.textContent = text;
+
+    // Add click events only to "-" and "+"
+    if (text === '+') {
+      p.addEventListener('click', () => {
+        IncreaseItemQuantity(id);
+      });
+    }
+
+    if (text === '-') {
+      p.addEventListener('click', () => {
+        if (quantity > 1) {
+          DecreaseItemQuantity(id);
+        }
+      });
+    }
+
+    quantityBtn.appendChild(p);
+  });
+
+  bottomDiv.appendChild(quantityBtn);
+
+  // Append everything
+  cartRight.appendChild(infoDiv);
+  cartRight.appendChild(bottomDiv);
+  cartItem.appendChild(cartRight);
+
+  return cartItem;
+}
+
+const cartContainer = document.querySelector('.modal-content');
+const closeModalIcon = document.querySelector('.modal-close');
+
+const modal = document.querySelector('.modal-wrapper');
+
+closeModalIcon.addEventListener('click', () => {
+  modal.classList.add('hidden'); // This will trigger the fade-out effect
+
+  setTimeout(() => {
+    modal.style.display = 'none'; // Hide the modal
+  }, 300); // Time must match the CSS transition duration
+});
+
+function renderCart() {
+  const cart = JSON.parse(localStorage.getItem('carts')) || [];
+  cartContainer.innerHTML = ''; // clear previous items
+
+  const numberOfCartItems = cart.length;
+  const cartNum = document.querySelector('.no-of-item');
+  if (numberOfCartItems > 0) {
+    cartNum.classList.remove('hidden');
+    cartNum.style.display = 'block';
+    cartNum.innerHTML = numberOfCartItems;
+  }
+
+  if (cart.length === 0) {
+    const h1 = document.createElement('h1');
+    h1.textContent = 'No Cart Item';
+    h1.className = 'no-cart-item';
+    cartContainer.appendChild(h1);
+    return;
+  }
+
+  cart.forEach((it) => {
+    const cartItemElement = createCartItem({
+      imageSrc: it?.image,
+      titleText: it?.name,
+      priceText: it.price,
+      quantity: it.quantity,
+      id: it.id,
+    });
+    cartContainer.appendChild(cartItemElement);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderCart();
+});

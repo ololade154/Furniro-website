@@ -10,6 +10,37 @@
 ul li {
   list-style: none;
 }
+
+.cart-icon {
+  position: relative; /* This will allow the child .no-of-item to be positioned relative to this container */
+  display: inline-block; /* Ensures the cart icon and the number align properly */
+}
+
+.no-of-item {
+  position: absolute; /* This allows the number to be positioned relative to .cart-icon */
+  top: -18px; /* Aligns it to the very top */
+  left: 10px; /* Positions it on the right side */
+  background-color: red; /* You can adjust the background color */
+  color: white; /* Text color */
+  padding: 5px 10px; /* Adds space around the number */
+  border-radius: 50%; /* Makes it circular */
+  font-size: 12px; /* Adjust the font size as needed */
+  font-weight: bold;
+}
+
+.modal-wrapper {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+  visibility: visible;
+}
+
+.modal-wrapper.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+.no-of-item.hidden {
+ display: none;
+}
 a {
   text-decoration: none;
   color: black;
@@ -294,6 +325,13 @@ body {
     font-size: 14px;
     font-weight: 500;
   }
+
+  .no-cart-item {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 60px;
+  }
+
   .link-header p {
     font-size: 14px;
     font-weight: 500;
@@ -335,7 +373,7 @@ body {
     position: fixed;
     top: 0;
     right: 0;
-    z-index: 9999999;
+    z-index: 600000;
     background-color: #ffff;
     width: 550px;
     height: 100vh;
@@ -665,6 +703,12 @@ body {
   .links li {
     font-size: 14px;
     font-weight: 500;
+  }
+
+  .no-cart-item {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 60px;
   }
 
   .modal-header {
