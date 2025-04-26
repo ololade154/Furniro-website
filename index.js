@@ -145,6 +145,7 @@ const productNode = (data) => {
 const prod = Products.map((product) => productNode(product));
 
 productSection.append(...prod);
+
 const modalWrapper = document.querySelector('.modal-wrapper');
 const modal = document.querySelector('.modal');
 const modalData = () => {
