@@ -33,8 +33,11 @@ ul li {
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
   visibility: visible;
+  overflow-y: auto;
 }
-
+.modal-wrapper::-webkit-scrollbar {
+  display: none;
+}
 .modal-wrapper.hidden {
   opacity: 0;
   visibility: hidden;
@@ -741,12 +744,10 @@ body {
   .modal-content {
     margin-top: 15px;
   }
-
   .modal-wrapper {
     position: fixed;
     top: 0;
     right: 0;
-
     z-index: 9999999;
     background-color: #cea9a9;
     width: 100%;
@@ -805,11 +806,9 @@ body {
     border-bottom: 1px solid #e0e0e0;
     padding-bottom: 15px;
   }
-
   .modal-header h2 {
     font-weight: 500;
   }
-
   .cart-item:not(:first-of-type) {
     margin-top: 15px;
   }
