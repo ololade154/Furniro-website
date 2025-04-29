@@ -84,15 +84,18 @@ const Products = [
 ];
 
 const cart = JSON.parse(localStorage.getItem('carts')) || [];
-const logo = document.querySelector('.cart-logo');
 
-logo.addEventListener('click', () => {
-  modal.style.display = 'block'; // Make it appear in the flow
-  console.log('clicked');
+const cartLogo = document.querySelectorAll('.cart-logo');
+const modal = document.querySelector('.modal-wrapper'); // make sure this exists too
 
-  setTimeout(() => {
-    modal.classList.remove('hidden'); // Trigger fade-in effect
-  }, 10);
+cartLogo.forEach((logo) => {
+  logo.addEventListener('click', () => {
+    modal.style.display = 'block';
+    console.log('clicked');
+    setTimeout(() => {
+      modal.classList.remove('hidden');
+    }, 10);
+  });
 });
 
 const addItemToCart = (product) => {
@@ -269,7 +272,7 @@ function createCartItem({ imageSrc, titleText, priceText, quantity, id }) {
 const cartContainer = document.querySelector('.modal-content');
 const closeModalIcon = document.querySelector('.modal-close');
 
-const modal = document.querySelector('.modal-wrapper');
+// const modal = document.querySelector('.modal-wrapper');
 
 closeModalIcon.addEventListener('click', () => {
   modal.classList.add('hidden'); // This will trigger the fade-out effect
@@ -284,11 +287,14 @@ function renderCart() {
   cartContainer.innerHTML = ''; // clear previous items
 
   const numberOfCartItems = cart.length;
-  const cartNum = document.querySelector('.no-of-item');
+  const cartNums = document.querySelectorAll('.no-of-item');
+
   if (numberOfCartItems > 0) {
-    cartNum.classList.remove('hidden');
-    cartNum.style.display = 'block';
-    cartNum.innerHTML = numberOfCartItems;
+    cartNums.forEach((cartNum) => {
+      cartNum.classList.remove('hidden');
+      cartNum.style.display = 'block';
+      cartNum.innerHTML = numberOfCartItems;
+    });
   }
 
   if (cart.length === 0) {
