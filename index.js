@@ -145,7 +145,7 @@ const productNode = (data) => {
   button.addEventListener('click', () => {
     addItemToCart(data);
     renderCart();
-    alert('Product added to cart!');
+    // alert('Product added to cart!');
   });
   product_text.appendChild(button);
 
